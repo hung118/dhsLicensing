@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:security="http://www.springframework.org/schema/security"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+			
+	<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled">
+		<security:expression-handler ref="expressionHandler"/>
+	</security:global-method-security>
+
+	<bean id="expressionHandler" class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
+		<property name="permissionEvaluator" ref="cclPermissionEvaluator"/>
+	</bean>
+	
+	<bean id="cclPermissionEvaluator" class="gov.utah.dts.det.ccl.security.permissions.CclPermissionEvaluator"/>
+
+	<bean id="springSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+		<security:filter-chain-map path-type="ant">
+			<security:filter-chain pattern="/images/**" filters="noFilter"/>
+			<security:filter-chain pattern="/scripts/**" filters="noFilter"/>
+			<security:filter-chain pattern="/styles/**" filters="noFilter"/>
+			<security:filter-chain pattern="/canary/**" filters="noFilter"/>
+			<security:filter-chain pattern="/canaryDetail/**" filters="noFilter"/>
+			<security:filter-chain pattern="/**" filters="devSiteminderFilter,contextIntegrationFilter,logoutFilter,preAuthFilter,anonymousAuthFilter,exceptionTranslationFilter,filterSecurityInterceptor"/>
+		</security:filter-chain-map>
+	</bean>
+	
+	<bean id="preAuthEntryPoint" class="gov.utah.dts.det.ccl.security.CclAuthenticationEntryPoint">
+		<property name="loginUrl" value="#{applicationService.getApplicationPropertyValue('app.login-url')}"/>
+	</bean>
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider ref="preauthAuthProvider"/>
+		<security:authentication-provider ref="anonymousAuthProvider"/>
+	</security:authentication-manager>
+	
+	<!-- Provider Configuration -->
+	
+	<bean id="anonymousAuthProvider" class="org.springframework.security.authentication.AnonymousAuthenticationProvider">
+		<property name="key" value="AN0NK3Y"/>
+	</bean>
+
+	<bean id="preauthAuthProvider" class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+		<property name="preAuthenticatedUserDetailsService">
+			<bean id="userDetailsServiceWrapper" class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+				<property name="userDetailsService" ref="userDetailsService"/>
+			</bean>    
+		</property>
+	</bean>
+    
+	<bean id="userDetailsService" class="gov.utah.dts.det.ccl.security.CclUserDetailsService">
+		<property name="userService" ref="userService"/>
+	</bean>
+    
+	<bean id="webExpressionHandler" class="gov.utah.dts.det.ccl.security.CclWebSecurityExpressionHandler"/>
+    
+	<bean id="webExpressionVoter" class="org.springframework.security.web.access.expression.WebExpressionVoter">
+		<property name="expressionHandler" ref="webExpressionHandler"/>
+	</bean>
+    
+	<bean id="httpRequestAccessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+		<property name="allowIfAllAbstainDecisions" value="false"/>
+		<property name="decisionVoters">
+			<list>
+<!--                <ref bean="cclAuthenticatedVoter"/>-->
+				<ref bean="webExpressionVoter"/>
+			</list>
+		</property>
+	</bean>
+    
+<!--    <bean id="cclAuthenticatedVoter" class="gov.utah.dts.det.ccl.security.CclAuthenticatedVoter"/>-->
+
+	<!-- Filter Configuration -->
+	
+	<bean id="noFilter" class="gov.utah.dts.det.util.NoFilter"/>
+	
+	<bean id="devSiteminderFilter" class="gov.utah.dts.det.util.DevSiteminderFilter">
+		<property name="principalRequestHeader" value="email"/>
+		<property name="anonymousUserPrincipal" value="#{applicationService.getApplicationPropertyValue('app.anonymous-username')}"/>
+	</bean>
+	
+	<bean id="contextIntegrationFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter"/>
+    
+	<bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<constructor-arg value="#{applicationService.getApplicationPropertyValue('app.logout-url')}"/>
+		<constructor-arg>
+			<array>
+				<bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+			</array>
+		</constructor-arg>
+		<property name="filterProcessesUrl" value="/security/logout.action"/>
+	</bean>
+    
+	<bean id="preAuthFilter" class="gov.utah.dts.det.ccl.security.CclPreAuthenticationFilter">
+		<property name="anonymousUserPrincipal" value="#{applicationService.getApplicationPropertyValue('app.anonymous-username')}"/>
+		<property name="principalRequestHeader" value="email"/>
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="checkForPrincipalChanges" value="true"/>
+	</bean>
+	
+	<bean id="anonymousAuthFilter" class="org.springframework.security.web.authentication.AnonymousAuthenticationFilter">
+		<property name="key" value="AN0NK3Y"/>
+		<property name="userAttribute" value="#{applicationService.getApplicationPropertyValue('app.anonymous-username')},ROLE_ANONYMOUS"/>
+	</bean>
+	<!-- Was after anonymousAuthFilter in filter chain, not needed in dhs ol app
+	<bean id="onNetworkFilter" class="gov.utah.dts.det.ccl.security.OnNetworkFilter">
+		<property name="onNetworkRequestHeader" value="#{applicationService.getApplicationPropertyValue('app.on-network-header')}"/>
+	</bean>
+	-->
+	
+	<bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
+		<property name="authenticationEntryPoint" ref="preAuthEntryPoint"/>
+		<property name="accessDeniedHandler" ref="accessDeniedHandler"/>
+	</bean>
+	
+	<bean id="accessDeniedHandler" class="gov.utah.dts.det.ccl.security.CclAccessDeniedHandler">
+		<property name="anonymousUserPrincipal" value="#{applicationService.getApplicationPropertyValue('app.anonymous-username')}"/>
+		<property name="loginUrl" value="http://localhost:8080/dhsLicensing/home/index.action"/>
+	</bean>
+
+	<bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="accessDecisionManager" ref="httpRequestAccessDecisionManager" />
+		<property name="securityMetadataSource">
+			<security:filter-security-metadata-source use-expressions="true">
+				<security:intercept-url pattern="/security/**" access="isAnonymous() or hasRole('ROLE_USER')"/>
+				<security:intercept-url pattern="/errors/**" access="isAnonymous() or hasRole('ROLE_USER')"/>
+				<security:intercept-url pattern="/public/**" access="isAnonymous() or hasRole('ROLE_USER')"/>
+				<security:intercept-url pattern="/pub/**" access="isAnonymous() or hasRole('ROLE_USER')"/>
+				<security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_SUPER_ADMIN')"/>
+				<security:intercept-url pattern="/home/**" access="hasRole('ROLE_USER')"/>
+				<security:intercept-url pattern="/bcusearch/**" access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_BACKGROUND_SCREENING_MANAGER','ROLE_BACKGROUND_SCREENING')"/>
+				<security:intercept-url pattern="/unlicensedcomplaints/**" access="isAuthenticated() and principal.isInternal()"/>
+				<security:intercept-url pattern="/facility/search/**" access="hasRole('ROLE_USER')"/>
+				<security:intercept-url pattern="/facility/complaints/**" access="isAuthenticated() and principal.isInternal()"/>
+				<security:intercept-url pattern="/facility/create-facility.action" access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_OFFICE_SPECIALIST','ROLE_LICENSOR_SPECIALIST')"/>
+				<security:intercept-url pattern="/facility/screenings/tab.action" access="(isAuthenticated() and principal.isInternal()) or hasRole('ROLE_ACCESS_PROFILE_VIEW')"/>
+				<security:intercept-url pattern="/facility/screenings/screenings-list.action*" access="isAuthenticated() and principal.isInternal()"/>
+				<security:intercept-url pattern="/facility/screenings/**" access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_BACKGROUND_SCREENING','ROLE_BACKGROUND_SCREENING_MANAGER')"/>
+				<security:intercept-url pattern="/facility/edit-facility.action*" access="hasAnyRole('ROLE_FACILITY_PROVIDER','ROLE_ACCESS_PROFILE_VIEW') or (isAuthenticated() and principal.isInternal())"/>
+				<security:intercept-url pattern="/facility/information/**" access="hasAnyRole('ROLE_FACILITY_PROVIDER','ROLE_ACCESS_PROFILE_VIEW') or (isAuthenticated() and principal.isInternal())"/>
+				<security:intercept-url pattern="/facility/variances/**" access="(isAuthenticated() and principal.isInternal()) or hasRole('ROLE_FACILITY_PROVIDER')"/>
+				<security:intercept-url pattern="/facility/variances/save-new-variance.action" access="(isAuthenticated() and principal.isInternal()) or hasRole('ROLE_FACILITY_PROVIDER')"/>
+				<security:intercept-url pattern="/facility/variances/save-licensor-outcome.action" access="hasRole('ROLE_LICENSOR_SPECIALIST')"/>
+				<security:intercept-url pattern="/facility/variances/save-supervisor-outcome.action" access="hasRole('ROLE_LICENSOR_MANAGER')"/>
+				<security:intercept-url pattern="/facility/variances/save-outcome.action" access="hasRole('ROLE_LICENSING_DIRECTOR')"/>
+				<security:intercept-url pattern="/facility/variances/save-revoke.action" access="hasRole('ROLE_LICENSING_DIRECTOR')"/>
+				<security:intercept-url pattern="/facility/**" access="(isAuthenticated() and principal.isInternal()) or hasRole('ROLE_ACCESS_PROFILE_VIEW')"/>
+				<security:intercept-url pattern="/facility/**/*save*" access="isAuthenticated() and principal.isInternal()"/>
+				<security:intercept-url pattern="/caregiver/**" access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_OFFICE_SPECIALIST')"/>
+				<security:intercept-url pattern="/caseloadmanagement/**" access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_ADMIN_MANAGER')"/>
+				<security:intercept-url pattern="/documents/print.action*" access="isAnonymous() or hasRole('ROLE_USER')"/>
+				<security:intercept-url pattern="/renderabledocuments/download.action*" access="isAnonymous() or hasRole('ROLE_USER')"/>
+				<security:intercept-url pattern="/trackingrecordscreening/**" access="hasAnyRole('ROLE_SUPER_ADMIN','ROLE_BACKGROUND_SCREENING','ROLE_BACKGROUND_SCREENING_MANAGER','ROLE_ACCESS_PROFILE_VIEW')"/>
+				<security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+			</security:filter-security-metadata-source>
+		</property>
+	</bean>
+</beans>

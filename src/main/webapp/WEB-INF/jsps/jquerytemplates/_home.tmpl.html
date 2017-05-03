@@ -1,0 +1,17 @@
+<script id="all-staff-section-tmpl" type="text/x-jquery-tmpl">
+	<div class="topControls">
+		<a href="${appendUrlParam($item.url, 'active', !active)}" class="ccl-button ajaxify {onSuccess: function(data) {handleStaffSection(data);}}">Show {{if active}}Inactive{{else}}Active{{/if}} Staff</a>
+	</div>
+	{{tmpl '#all-staff-row-tmpl', sections, $item.rowOptions}}
+</script>
+
+<script id="all-staff-row-tmpl" type="text/x-jquery-tmpl">
+	<div class="staff-section ccl-margin-top">
+		<h2 class="staff-section-title">${sectionName}</h2>
+		<ol>
+			{{each people}}
+				<li><a href="${appendUrlParam($item.userHomeUrl, 'personId', $value.id)}">${$value.firstName} ${$value.lastName}</a></li>
+			{{/each}}
+		</ol>
+	</div>
+</script>

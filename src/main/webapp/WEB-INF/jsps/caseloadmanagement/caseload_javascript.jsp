@@ -1,0 +1,2 @@
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<script type="text/javascript" src="<s:property value="scriptsDir"/>/caseload<s:property value="@gov.utah.dts.det.util.SiteUtil@getResourceVersionString()"/>.js"></script>

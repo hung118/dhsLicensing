@@ -1,0 +1,100 @@
+/* !!! This site uses an elastic layout. Most browsers use 16px as the default font, so a 950px design = 950/16 = 59.375em  !!! */
+
+
+
+/* ------------------------------------------------   HTML   ------------------------------------------------ */
+body {
+	background:none;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#000000;
+	margin:0px;
+}
+
+p {
+	font-size:10pt;
+	margin-top:0px;
+}
+
+
+/* ------------------------------------------------   Layout   ------------------------------------------------ */
+#wrapper {
+	background-color:#FFFFFF;
+	/*background-color:#CCFF99;*/
+	width:650px; /*approx 950px */
+	margin:0px;
+	text-align:left;
+	float:none;
+}
+
+/* use the uiiBanner div to display the print background. browsers do not typically print background images, but they do print list-item images. make the div display like a list, set the uii table to display:none, move any text off the screen by 1000em */
+#uiiBanner {	
+	display: list-item;                
+	list-style-image:url(file:///C|/Web%20Stuff/ChildCareLicensing2007/images/printBanner.jpg);
+	list-style-position: inside;       
+	letter-spacing: -1000em;           
+	font-size: 1pt;                    
+	color: #FFFFFF; 
+	height:68px;
+	min-height:68px;
+	/*border:black dashed 2px;*/
+}
+
+#uiiBanner table {
+	display:none;
+}
+
+
+#mainNav {
+	display:none;
+}
+
+#content {
+	/*background-color:#00FF00;*/
+	width:650px;
+	float:none;
+	margin:0px;
+}
+
+#branding {
+	display:none;
+}
+
+
+#topNav {
+	display:none;
+}
+
+
+#breadCrumb {
+	display:none;
+}
+
+
+#mainContent {
+	width:650px;
+	float:none;
+	margin-bottom:20px;
+	padding-bottom:20px;
+	border-bottom:2px solid #003765;
+}
+
+
+#secondaryContent {
+	width:650px;
+	float:none;
+	border:none;
+}
+
+
+
+
+/* ------------------------------------------------   Custom   ------------------------------------------------ */
+#skipToContent{
+	display:none;
+}
+
+
+
+
+
+

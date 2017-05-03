@@ -1,0 +1,44 @@
+package gov.utah.dts.det.ccl.sort.enums;
+
+import gov.utah.dts.det.query.SortBy;
+import gov.utah.dts.det.query.SortDirection;
+
+public enum FacilityLicenseSummarySortBy implements SortBy {
+	
+	FACILITY_NAME("Facility Name", "flv.facilityName", SortDirection.ASCENDING),
+	EXPIRE_DATE("License Expiration", "flv.expirationDate", SortDirection.ASCENDING);
+
+	private final String label;
+	private final String orderByString;
+	private final SortDirection defaultSortDirection;
+	
+	private FacilityLicenseSummarySortBy(String label, String orderByString, SortDirection defaultSortDirection) {
+		this.label = label;
+		this.orderByString = orderByString;
+		this.defaultSortDirection = defaultSortDirection;
+	}
+	
+	@Override
+	public String getKey() {
+		return name();
+	}
+	
+	@Override
+	public String getLabel() {
+		return label;
+	}
+	
+	@Override
+	public String getOrderByString() {
+		return orderByString;
+	}
+	
+	@Override
+	public SortDirection getDefaultSortDirection() {
+		return defaultSortDirection;
+	}
+	
+	public static FacilityLicenseSummarySortBy getDefaultSortBy() {
+		return FACILITY_NAME;
+	}
+}

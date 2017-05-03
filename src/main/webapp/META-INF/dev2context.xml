@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context docBase="dhsLicensing" path="/dhsLicensing" reloadable="true">
+
+	<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" 
+			  factory="gov.utah.dts.pool.EncryptedDataSourceFactory"
+			  initialSize="3"
+			  jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
+			  jmxEnabled="true"
+			  logAbandoned="true"
+			  maxIdle="3"
+			  maxActive="3"
+			  maxWait="10000"
+			  minEvictableIdleTimeMillis="30000"
+			  minIdle="2"
+			  name="jdbc/dhsLicensing" 
+			  password="aDVfMWljZW41aW5n" 
+			  removeAbandoned="true"
+			  removeAbandonedTimeout="60"
+			  testOnBorrow="true"
+			  testOnReturn="false"
+			  testWhileIdle="true"
+			  timeBetweenEvictionRunsMillis="30000"
+			  type="javax.sql.DataSource"
+			  url="jdbc:oracle:thin:@itdb200sp.dts.utah.gov:1521:vdv2" 
+			  username="aHNfbGljZW5zaW5nMg=="
+			  validationInterval="30000"
+			  validationQuery="SELECT 1 from dual"/>
+</Context>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="SpecialistType">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.SpecialistType</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="RoleType">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.RoleType</param>
+		<param name="identifierMethod">getRoleId</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="FindingCategoryType">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.FindingCategoryType</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="PickListValueRelationshipType">
+		<param name="enumClass">gov.utah.dts.det.admin.model.enums.PickListValueRelationshipType</param>
+		<param name="identifierMethod">name</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="PickListValuePersonRelationshipType">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.PickListValuePersonRelationshipType</param>
+		<param name="identifierMethod">name</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="FacilityType">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.FacilityType</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="Gender">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.Gender</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="CondSanc">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.CondSanc</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="FacilityEventType">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.FacilityEventType</param>
+		<param name="identifierMethod">getTypeName</param>
+		<param name="valueOfMethod">valueByTypeName</param><!-- Need to override this because an enum implicity defines the valueOf(String) method which cannot be overridden since it is static -->
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="AppealOutcome">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.AppealOutcome</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="ScreeningType">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.ScreeningType</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="ScreeningCheckType">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.ScreeningCheckType</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="ScreeningResult">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.ScreeningResult</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="AllegationOutcome">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.AllegationOutcome</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="TransactionType">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.TransactionType</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="VarianceOutcome">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.VarianceOutcome</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="RuleCategory">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.RuleCategory</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="USState">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.USState</param>
+		<param name="identifierMethod">name</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="DeliveryMethod">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.DeliveryMethod</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="DownloadTimes">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.DownloadTimes</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="NameUsage">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.NameUsage</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="CorrectionVerificationType">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.CorrectionVerificationType</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+		<typedef class="gov.utah.dts.det.ccl.model.enums.GenericEnumUserType" name="ScreeningConvictionLetterType">
+		<param name="enumClass">gov.utah.dts.det.ccl.model.enums.ScreeningConvictionLetterType</param>
+		<param name="identifierMethod">getCharacter</param>
+	</typedef>
+	<typedef class="gov.utah.dts.det.model.types.JSONObjectUserType" name="Json"/>
+</hibernate-mapping>

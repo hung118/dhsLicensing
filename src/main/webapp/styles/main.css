@@ -1,0 +1,1444 @@
+/* --------------------------------------   HTML   -------------------------------------- */
+html {
+	height: 100%;
+	color:#666;
+}
+
+body {
+	text-align: left;
+	background: url("images/main-bg.png") repeat-y center top,
+		url("images/graystripe.png") repeat left top;
+	background-color:#eee;
+	min-height: 100%;
+}
+
+td, th {
+	padding: 0.15em 0.4em;
+	vertical-align: top;
+}
+
+a {
+	color: #0086C8;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;
+	color: #000000;
+}
+
+hr {
+	color:#003765;
+}
+
+strong {
+	font-weight: bold;
+}
+
+h1 {
+	color: #444;
+	font-size: 131%;
+}
+
+h2 {
+	color: #444;
+	font-size: 108%;
+}
+
+/* --------------------------------------   LAYOUT   -------------------------------------- */
+#hd {
+	background-color: #FFFFFF;
+	height: 80px;
+	padding: .5em;
+}
+#ft {
+	text-align: center;
+	background:#0086C8;
+	color:#fff;
+	padding:5px;
+	margin:10px 18px 0;
+	bottom:0;
+	width:950px;
+}
+
+.heading {
+	margin-bottom: 1em;
+	position: relative;
+}
+
+.introParagraph {
+	font-size: 131%;
+}
+
+#doc2 {
+	text-align: left;
+	/*border: 1px #354263 solid;*/
+	position: relative;
+	min-height: 100%;
+	
+}
+
+#leftNav {
+	color: #000000;
+	position: fixed;
+	width: 202px;
+	padding:10px;
+	margin: 20px 0 0 -50px;
+	background:transparent url("images/left-nav-bg.png") repeat-y left top;
+	box-shadow: 0 0 4px #aaa;
+}
+#leftNav li {
+}
+#leftNav li a {
+    display: block;
+    font-weight: bold;
+    padding: 5px 5px;
+	color: #666;
+	border-bottom:1px solid #ddd;
+	border-top:1px solid #fff;
+	width:180px;
+	margin-left:5px;
+	text-shadow: 0 1px 0 #fff;
+}
+#leftNav li:first-child a {
+	border-top:none;
+}
+#leftNav li:last-child a {
+	border-bottom:none;
+}
+
+#leftNav li a:hover {
+	text-decoration: none;
+	color: #0086C8;
+}
+
+#ccl-public-leftnav {
+	padding: .4em 0;
+}
+
+#leftNav ul { /* setting margin and padding (in this case, '0') on ul is critical for FF */
+	margin: 0px;
+	background:#f2f2f2;
+	border:1px solid #e6e6e6;
+	width: 200px;
+}
+
+#leftNav h1 {
+	font-weight: bold;
+	padding-left: .4em;
+}
+
+/* ------------------------------- TAB NAVIGATION ----------------------------- */
+ul.ccl-subnav {
+	background: #666 url("images/sub-nav-menu.png") repeat-x left top;
+	margin-top:-10px;
+}
+.ccl-subnav li {
+	float: left;
+	border-left:1px solid #fff;
+	border-right:1px solid #999;
+}
+.ccl-subnav li:first-child {
+	border-left: none;
+}
+.ccl-subnav li a {
+	text-decoration: none;
+	display: block;
+	padding: .5em;
+	color: #666;
+	border-bottom: 4px solid #999;
+}
+.ccl-subnav li a:hover, .ccl-subnav li a.selected {
+	color: #666;
+	border-bottom: 4px solid #0086C8;
+}
+
+/* ---------------- FIELDSETS ----------------- */
+fieldset { 
+	margin: .6em;
+	/*margin-top: .6em;*/
+	padding: 1em;
+	border: 1px solid #808080;
+	/*border-top: 1px solid #808080;*/
+	position: relative;
+}
+
+legend {
+	background:#666666;
+    color: #FFFFFF;
+    font-size: 131%;
+    font-weight: bold;
+    margin-left: -14px;
+    padding: 1px 16px;
+}
+
+fieldset.ccl-file-check {
+	border: 2px solid #A0A0A0;
+    margin: 0.6em 0 0.6em 0;
+    padding: 0 1em 0 1em;
+}
+.ccl-file-check legend {
+	padding: 0 0.3em;
+}
+.ccl-file-check .ccl-list li {
+	border-top: 2px solid #A0A0A0;
+}
+.ccl-section {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.inner_fieldset { 
+	padding: 5px;
+	border:1px solid #013f3e;
+	background:#F8F8F8;
+	margin: 0;
+}
+.inner_fieldset legend {
+	font-size: 100%;
+}
+.subSection {
+	padding: .5em;
+}
+.ccl-fs-ctrls {
+	position: absolute;
+	top: .7em;
+	right: 0em;
+	background-color: #EEEEEE;
+	border-bottom: 1px solid #808080;
+	border-left: 1px solid #808080;
+	padding: 1em;
+}
+.ccl-fs-ctrls-show-hide {
+	position: absolute;
+	bottom: 0em;
+	left: 0em;
+}
+
+/* ------------------------------- FORMS --------------------------------- */
+select, textarea, input[type="text"], input[type="password"] {
+	border: #808080 1px solid;
+}
+select, input, button, textarea, button, password {
+	font-size: 100%;
+}
+label {
+	display: block;
+	text-align: left;
+	margin-top:5px;
+}
+ol.fieldList > li {
+	margin-bottom: .5em;
+	width: 100%;
+}
+ol.fieldList > li:last-child {
+	margin-bottom: 0em;
+}
+ol.fieldList > li > label,
+ol.fieldList > li > .label,
+ol.fieldList > li.column > ol > li > label,
+ol.fieldList > li.widecolumn > ol > li > label,
+ol.fieldList > li.widercolumn > ol > li > label,
+ol.fieldList > li.widercolumn > ol > li > .label {
+	float: left;
+	width: 7em;
+	text-align: right;
+	font-weight: bold;
+	margin-right: .7em;
+	margin-top:5px;
+	color:#666;
+}
+ol.fieldList > li > ol > li > label,
+ol.fieldList > li > ol > li > .label {
+	text-align: left;
+	font-weight: bold;
+	margin-right: .7em;
+	margin-top:5px;
+	color:#666;
+}
+ol.fieldList > li.column > ol > li > label,
+ol.fieldList > li.widecolumn > ol > li > label {
+	width:14em;
+}
+ol.fieldList > li.widercolumn > ol > li > label,
+ol.fieldList > li.widercolumn > ol > li > .label {
+	width:15em;
+}
+ol.fieldList > li.column {
+	float:left;
+	width:50%
+}
+ol.fieldList > li.widecolumn {
+	float:left;
+	width:100%;
+}
+ol.fieldList > li.widercolumn {
+	float:left;
+	width:100%;
+}
+ol.fieldList > li > .value,
+ol.fieldList > li.widecolumn > ol > li > .value,
+ol.fieldList > li.widercolumn > ol > li > .value {
+	margin-top: 5px;
+	float:left;
+}
+ol.fieldList > li > .mediumreadonly,
+li.widecolumn > ol > li > .mediumreadonly,
+li.widercolumn > ol > li > .mediumreadonly {
+	font-size: 1em;
+	font-weight: bold;
+	color: #666;
+	background-color: #f2f2f2;
+	width: 12em;
+	border: 1px solid #808080;
+	height: 18px;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 0 1px 2px #E6E6E6 inset;
+	margin: 3px 0;
+	float: left;
+	padding: 2px 3px 0px;
+}
+ol.fieldList > li.labelWidthMargin {
+	margin-left: 7.5em;		
+}
+ol.fieldGroup {
+	float: left;
+}
+ol.fieldGroup > li {
+	float: left;
+	margin-right: 1em;
+}
+ol.fieldGroup > li > .value {
+	float: left;
+	clear: left;
+}
+.borderedGroup {
+	padding: .2em 2em;
+}
+.fieldMargin {
+	margin-top: .5em;	
+}
+div.label {
+	margin-right: .5em;
+	float: left;
+	margin-top:5px;
+}
+span.label {
+	font-weight: bold;
+}
+.submit {
+	margin-top: 1em;
+}
+.submit form, .submit button {
+	float: left;
+	margin-right: .5em;
+}
+ol.searchResults > li {
+	padding: 0.2em 0.3em;
+	position: relative;
+}
+.description {
+	white-space: pre-line;
+}
+textarea {
+  width: 40em;
+  height: 6em;
+}
+textarea.smalltextarea {
+  width: 40em;
+  height: 2.5em;
+}
+textarea.mediumtextarea {
+  width: 40em;
+  height: 4em;
+}
+ol.fieldList > li.column > textarea,
+ol.fieldList > li.widecolumn > textarea {
+	width: 26em;
+	height:5em;
+}
+.tallTextArea {
+	height: 24em;
+}
+.dialogTextArea {
+	height: 6em;
+	width: 20em;
+}
+.orderField {
+	width: 35px;
+}
+.noMarginTop {
+	margin-top: 0 !important;
+}
+.marginTop {
+	margin-top: .5em;
+}
+.checkboxListLabel, .topLabel {
+	text-align: left;
+	width: 100% !important;
+	float: left;
+	padding-bottom: .2em;
+}
+.checkboxList .checkbox, .checkboxList input[type='checkbox'] {
+	padding: .1em 0 .1em .3em;
+	margin-top: 5px;
+	height: auto;
+}
+ol.fieldList > li.checkbox {
+	margin-left: 7.5em;	
+}
+ol.fieldList > li.checkbox > label {
+	font-weight: normal;
+	width: auto !important;	
+}
+.checkbox input {
+	float: left;
+	margin-right: .5em;
+}
+.checkbox label {
+	float: left
+}
+.checkbox.maintrs input {
+	margin: 0 4px;
+}
+.checkbox.maintrs label {
+	float:none;
+}
+.ccl-checkbox input, .ccl-checkbox label {
+	float: none;
+	display: inline;
+}
+
+.ruleDetail {
+	margin-top: .5em;
+}
+
+.formInfo {
+	margin-bottom: .5em;
+}
+
+.ccl-char-limit {
+	text-align: center;
+}
+
+/* ---------- COLUMN LAYOUT ------------ */
+.twoColumn > .column {
+	width: 50%;
+}
+.column, .widecolumn, .widercolumn {
+	float: left;
+}
+.lastColumn {
+	clear: right;
+}
+
+.left-column {
+	width: 50%;
+	float: left;
+}
+.right-column {
+	width: 50%;
+	float: right;
+}
+
+/* -------------- TABLES --------------- */
+table tr.odd {
+	background:#ECF5FB;
+}
+table tr.even {
+	background:#fff;
+}
+
+.topControls, .bottomControls, .tables, .searchResults {
+	width: 100%;
+}
+.tables, .bottomControls, .searchResults {
+	margin-top: 1em;
+}
+ol.tables > li {
+	overflow: auto;
+	position: relative;
+}
+.mainControls {
+	float: left;
+}
+.mainControls form {
+	float: left;
+	margin-right: .5em;
+}
+.mainControls label {
+	padding-top: .35em;
+}
+.mainControls input[type = "radio"] {
+	margin-top: .4em;
+}
+.sortControl {
+	float: right;
+	clear: right;
+}
+.sortControl label {
+	width: auto;
+}
+.tables th {
+	background: #0086C8;
+	font-weight: bold;
+	color: #FFFFFF;
+	vertical-align: bottom;
+	padding: 6px 7px;
+}
+.tables th a {
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.tables th a:hover {
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+.tables th .ccl-button {
+	
+}
+.tables th .ccl-button, .tables th .ccl-button:hover {
+	font-weight: normal;
+	color: #555555;
+}
+.tables th.submit {
+	font-size: 100%;
+	font-weight: normal;
+}
+.tables th.displayHeaderCurrency {
+	text-align: center;
+}
+.spanCols {
+	clear: both;
+}
+.even {
+	background-color: #dcd2db;
+}
+.ccl-inline-form {
+	display: inline;
+}
+.ccl-inline-form label {
+	display: inline;
+	margin: 0 .5em;
+}
+.ccl-right-float {
+	float: right;
+}
+.ccl-button-no-bg {
+	border: none !important;
+	background: none !important;
+}
+.deleteLink {
+	position: absolute;
+	right: .3em;
+	top: .3em;
+}
+.headingRow {
+	margin-top: .5em;
+}
+.total {
+	border-top: 1px solid #000000;
+}
+.currency {
+	text-align: right;
+	width: 5em;
+}
+.tableDescription {
+	margin-bottom: 1em;
+}
+.sorter {
+	float: right;
+}
+.sorter label {
+	float: left;
+	margin-right: .5em;
+}
+
+/* ------------ LIST STYLES ---------------*/
+.ccl-list {
+	margin: 1em -1em;
+}
+.ccl-list > li {
+	border-top: 1px solid #A0A0A0;
+	padding: 1em;
+}
+.ccl-list > li:last-child {
+	border-bottom: 1px solid #A0A0A0;
+}
+.ccl-list .label {
+	float: none;
+}
+.ccl-list .value {
+	float: none;
+}
+.ccl-list-item-ctrls {
+	padding-top: 1em;
+}
+.ccl-list li.odd, .ccl-list li.even {
+	background: none;
+}
+.ccl-list-item {
+	position: relative;
+}
+.ccl-abs-bot-right {
+	position: absolute;
+	right: 1em;
+	bottom: 1em;
+}
+.ccl-list-left-ctrls {
+	float: left;
+}
+.ccl-list-right-ctrls {
+	float: right;
+}
+.ccl-list-ctrls label, .ccl-list-ctrls .label {
+	display: inline; 
+}
+/* ------------ DIALOG STYLES --------------- */
+.ccl-dialog p {
+	margin-bottom: 1em;	
+}
+.ccl-dialog .ccl-error-list {
+	margin-bottom: 1em;
+}
+
+/* ------------ MISC STYLES ----------------- */
+.ccl-margin-top {
+	margin-top: 1em;
+}
+.ccl-margin-bottom {
+	margin-bottom: 1em;
+}
+
+/* ------------ LIST CONTROLS COMPONENT ------------ */
+.ccl-list-controls {
+	width: 100%;
+	overflow: auto;
+}
+/*.ccl-list-controls-top {
+	margin-bottom: 1em;
+}*/
+.ccl-list-controls-bottom {
+	margin-top: 1em;
+}
+.ccl-list-left-controls {
+	float: left;
+}
+.ccl-list-right-controls, .ccl-list-right-controls form {
+	float: right;
+}
+.ccl-list-control {
+	float: left;
+	margin-left: 0.5em;
+}
+.ccl-list-control label {
+	float: left;
+	margin-right: 0.5em;
+}
+
+
+.listControlsContainer, .listControlsForm {
+	float: right;
+}
+.listControlsForm > div {
+	float: left;
+	margin-left: 0.5em;
+}
+.sorterContainer label, .filterContainer label {
+	float: left;
+	margin-right: 0.5em;
+}
+.pagerContainer .value {
+	float: left;
+}
+.resultsContainer {
+	width: 100%;
+	text-align: center;
+	margin-top: 5px;
+}
+
+/* ------------ MESSAGES ------------- */
+.redtext {
+	color: #FF0000;
+}
+.errorList, .ccl-error-list {
+	color: #BB0000;
+	border: 1px solid #FF0000;
+	background-color: #FEE;
+	padding: 5px;
+	margin-bottom: 5px;
+}
+.errorList li, .ccl-error-list li {
+	margin: 0px;
+	list-style: disc inside none;
+	padding: 2px;
+}
+.inputerror {
+	border: 1px solid #F00 !important;
+	background-color: #FFEEEE !important;
+}
+.actionMessage {
+	color: #336633;
+	border: 1px solid #336633;
+	background-color: #EFE;
+	padding: 5px;
+	margin-bottom: 5px;
+}
+.actionMessage li {
+	margin: 0px;
+	list-style: disc inside none;
+	padding: 2px;	
+}
+.infoPanel {
+	border: 1px solid #F00 !important;
+	padding: .5em;
+	background-color: #FFEEEE !important;
+}
+.managerApprovalPending {
+	background-color: #EFE;
+}
+ul.actionAlertsList {
+	margin-left: 1.5em;
+}
+ul.actionAlertsList li {
+	list-style-type: disc;
+}
+
+.ccl-st-nt-info {
+	margin-bottom: .5em;	
+}
+
+.ccl-st-nt-tbl {
+	max-width: 800px;
+	font-size: 110%;
+}
+
+.ccl-st-nt-tbl tr {
+	border-top: 1px solid #A0A0A0;
+}
+.ccl-st-nt-tbl tr:last-child {
+	border-bottom: 1px solid #A0A0A0;
+}
+.ccl-st-nt-tbl td {
+	padding: .3em;
+}
+.ccl-st-nt-tbl td:last-child {
+	width: 1%;
+	white-space: nowrap;
+}
+
+/* ------------------------------- YUI TWEAKS --------------------------------- */
+/*.yui-skin-sam .yui-panel .hd {
+	font-size: 100%;
+	font-weight: normal;
+}*/
+
+.yui-t1 #yui-main .yui-b {
+	margin: 0 30px 0 192px;
+	padding:20px 0 0 0;
+}
+.yui-t1 #yui-main .yui-b.trs {
+	margin: 0 30px 0 30px;
+}
+.yui-skin-sam .yui-navset .yui-content {
+	background: #FFFFFF;
+}
+
+.yui-skin-sam .yui-navset .yui-nav a em, 
+.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em,
+.yui-skin-sam .yui-navset .yui-nav .selected a em {
+	padding-left: 2px;
+	padding-right: 2px;
+	/*font-size: 11px;*/
+	width: 76px;
+	height: 30px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.yui-skin-sam .yui-navset .yui-content, 
+.yui-skin-sam .yui-navset .yui-navset-top .yui-content {
+	padding: 0px;
+}
+
+.yui-navset .loading {
+	display: none;
+    /*background: #DDDDDD url(../images/earthspin.gif) no-repeat center center;*/
+    /*height:8em;*/ /* hold some space while loading */
+}
+
+.yui-skin-sam .yui-calendar td.calcell.restricted {
+	text-decoration: none;
+	color: #CCCCCC;
+}
+
+.yui-skin-sam .yui-navset .yui-nav .selected a, .yui-skin-sam .yui-navset .yui-nav .selected a:focus, .yui-skin-sam .yui-navset .yui-nav .selected a:hover {
+	background: #6e2672 url("../images/sprite.png") repeat-x scroll left -1400px;
+	/* top color: 008d8b */
+}
+
+.yui-skin-sam .yui-navset .yui-nav, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav { 
+	border-color: #6e2672;
+}
+
+.yui-skin-sam .mask {
+	background-color:#000000;
+	opacity:0.75;
+}
+
+.yui-skin-sam .yui-navset .yui-nav .disabled a em {
+	color: #999999;
+}
+
+.yui-skin-sam .yui-ac-input {
+	position: static;
+}
+
+/*.yui-skin-sam .yui-navset .yui-nav .selected a em {
+	width: 84px;
+}*/
+
+/*.yui-skin-sam .yui-navset .yui-nav .selected a, 
+.yui-skin-sam .yui-navset .yui-nav .selected a:focus, 
+.yui-skin-sam .yui-navset .yui-nav .selected a:hover {
+	background: #123456 url(../../../../../images/activetab.png) repeat-x scroll left;
+}*/
+
+/* Fix for YUI visibility: none; bug which causes the page not to shrink
+   to the size of the content when going between tabs of differing heights */
+.yui-navset .yui-content .yui-hidden {
+	display: none;
+}
+
+/* Modal Styles */
+#simplemodal-overlay {
+	background-color: #000;
+}
+#simplemodal-container {
+	background-color: #FFFFFF;
+	border: 8px solid #6e2672;
+	padding:12px;
+}
+#simplemodal-container a.modalCloseImg {
+	background:url(../images/close_modal.png) no-repeat; /* adjust url as required */
+	width:25px;
+	height:29px;
+	display:inline;
+	z-index:3200;
+	position:absolute;
+	top:-15px;
+	right:-18px;
+	cursor:pointer;
+}
+
+/* --------- CUSTOM FORM SETTINGS --------- */
+
+/* Admin */
+.noncompliance_matrix th {
+	text-align: center;
+}
+.noncompliance_matrix .row_title {
+	text-align: right;
+}
+.noncompliance_matrix input[type="text"] {
+	width: 50px;
+}
+.noncompliance_matrix th, .noncompliance_matrix .row_title {
+	color: #000000;
+	font-weight: bold;	
+}
+.noncompliance_matrix td {
+	padding: 3px;
+}
+
+
+#ncTriggersSection ol.fieldList > li > label, #ncTriggersSection ol.fieldList > li > .label {
+	width: 15em;
+}
+
+.accesslevelheader {
+	border-left: 1px solid #6e2672;
+	background-color: #6e2672;
+	color: #FFFFFF;
+	font-size: 123.1%;
+	font-weight: bold;
+	padding: 3px;
+	background: #6e2672 url(../images/sprite.png) repeat-x scroll left -1400px;
+}
+#regionsBase ol.fieldList > li > label, #regionsBase ol.fieldList > li > .label, ol.fieldList.medium > li > label {
+	width: 9em;
+}
+#regionsBase ol.fieldList .labelWidthMargin {
+	margin-left: 9.5em;
+}
+#rulesBase ol.fieldList > li > label, #rulesBase ol.fieldList > li > .label {
+	width: 12em;
+}
+#rulesBase ol.fieldList .labelWidthMargin {
+	margin-left: 12.5em;
+}
+#ruleCrossReferenceForm ol.fieldList > li > label, #ruleCrossReferenceForm ol.fieldList > li > .label {
+	width: 11em;
+}
+.rule-nav li a:hover {
+	border-bottom: none;
+}
+/* End Admin */
+
+/* Home Pages */
+
+fieldset.redAlerts {
+	border-color: #FF0000;
+}
+fieldset.redAlerts legend {
+	color: #FF0000;
+}
+fieldset.redAlerts .ccl-list-item {
+	border-top: 1px solid #FF0000;
+}
+.redAlertType {
+	margin-top: .5em;
+}
+.redAlertType .alertTypeTitle {
+	background-color: #FF0000;
+	color: #FFFFFF;
+	font-weight: bold;
+	display: block;
+	padding: .2em .5em;
+	margin: 0 -1em;
+}
+
+.region {
+	float: left;
+	background-color: #E2E2E2;
+	padding: 1em;
+	margin-right: 1em;
+}
+.staff-section {
+	float: left;
+	background-color: #E2E2E2;
+	padding: 1em;
+	margin-right: 1em;
+}
+.staff-section-title {
+	font-weight: bold;
+	font-size: 110%;
+	width: 100%;
+	text-align: center;
+	margin-bottom: .5em;
+}
+.redAlert, .redAlert a, .redAlert a:hover {
+	color: #FF0000;
+}
+.warningAlert, .warningAlert a, .warningAlert a:hover {
+	color: #F88017;
+}
+#delegateForm ol.fieldList > li > label, #delegateForm ol.fieldList > li > .label {
+	width: auto;
+}
+/* End Home Pages */
+
+/* Facility */
+#facilitySearchForm ol.fieldList > li > label, #facilitySearchForm ol.fieldList > li > .label,
+#directorPersonForm ol.fieldList > li > label, #directorPersonForm ol.fieldList > li > .label {
+	width: 8em;
+}
+.pf-panel {
+	width: 100%;
+	border-top: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	margin: 1em -1em;
+	padding: 1em;
+}
+.ccl-insp-foll-up-list h3 {
+	width: 100%;
+	margin: 1em 0;
+}
+.ccl-insp-foll-up-list ol {
+	margin-left: 1em;
+}
+.ccl-insp-foll-up-list .foll-up-lbl {
+	margin-right: .5em;
+}
+
+#compl-screen ol.fieldList > li > label, #compl-scrn-status ol.fieldList > li > label, #compl-scrn-status ol.fieldList > li > .label {
+	width: 8em;
+}
+#compl-scrn-status ol.fieldList > li > .value {
+	margin-left: 8.5em;
+}
+
+#complaintsBase #complaintInformationSection ol.fieldList > li > label, #complaintsBase #complaintInformationSection ol.fieldList > li > .label {
+	width: 15em;
+}
+#informationBase #informationSection ol.fieldList > li > label, #informationBase #informationSection ol.fieldList > li > .label,
+#informationBase #statusSection ol.fieldList > li > label, #informationBase #statusSection ol.fieldList > li > .label,
+#informationBase #licensesSection ol.fieldList > li > label, #informationBase #licensesSection ol.fieldList > li > .label,
+#complaintsBase #childrenInvolvedContent ol.fieldList > li > label, #complaintsBase #childrenInvolvedContent ol.fieldList > li > .label,
+#complaintsBase #complainantContent ol.fieldList > li > label, #complaintsBase #complainantContent ol.fieldList > li > .label,
+#complaintsBase #witnessesContent ol.fieldList > li > label, #complaintsBase #witnessesContent ol.fieldList > li > .label,
+#screeningsBase #screeningChecksSection ol.fieldList > li > label, #screeningsBase #screeningChecksSection ol.fieldList > li > .label {
+	width: 12em;
+}
+#complaintsBase #screeningContent ol.fieldList > li > label, #complaintsBase #screeningContent ol.fieldList > li > .label {
+	width: 10em;
+}
+#complaintsBase #investigationSection ol.fieldList > li > label, #complaintsBase #investigationSection ol.fieldList > li > .label {
+	width: 10em;
+}
+
+#screeningsBase #individualSection ol.fieldList > li > label, #screeningsBase #individualSection ol.fieldList > li > .label,
+#findingForm ol.fieldList > li > label {
+	width: 13em;
+}
+#screeningsBase #completionSection ol.fieldList > li > label, #screeningsBase #completionSection ol.fieldList > li > .label {
+	width: 14em;
+}
+#screeningsBase #resolutionOfDenialSection ol.fieldList > li > label, #screeningsBase #resolutionOfDenialSection ol.fieldList > li > .label {
+	width: 9em;
+}
+#createFacilityForm ol.fieldList > li > label, #createFacilityForm ol.fieldList > li > .label,
+#variancesBase ol.fieldList > li > label, #variancesBase ol.fieldList > li > .label,
+#incidentsBase ol.fieldList > li > label, #incidentsBase ol.fieldList > li > .label {
+	width: 11em;
+}
+
+#unlicensedComplaintForm ol.fieldList > li > label, #unlicensedComplaintForm ol.fieldList > li > .label {
+	width: 12em;
+}
+
+.outstandingCmp > tbody > tr > td:first-child {
+	width: 12em;
+}
+.outstandingCmp th {
+	vertical-align: middle;
+}
+.outstandingCmp th .ccl-button {
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+#outstandingCmpsList > li {
+	margin-top: 2em;
+	border: 2px solid #000000;
+}
+#outstandingCmpsList > li:first-child {
+	margin-top: 1em;
+}
+.cmpDate {
+	text-align: right;
+}
+.reasonField {
+	width: 19em;
+}
+.outstanding td {
+	color: #FF0000;
+	background-color: #FFFFFF;
+	border-top: 1px solid #000000;
+}
+.cmpFormRow {
+	border-bottom: 1px solid #000000;
+}
+.cmpAssessed {
+	border-bottom: 1px solid #000000;
+}
+.cmpAssessed td {
+	padding-top: .5em;
+	padding-bottom: .5em;
+}
+.transactionForm {
+	padding-bottom: .3em;
+}
+
+.incomplete_screening a, .failed_screening a, .unfinalized_screening a {
+	text-decoration: none;
+}
+.incomplete_screening a:hover, .failed_screening a:hover, .unfinalized_screening a:hover {
+	text-decoration: underline;
+}
+.incomplete_screening {
+	color: #FF0000;
+}
+.failed_screening {
+	color: #6633CC;
+}
+.unfinalized_screening {
+	color: #006600;
+}
+/* End Facility */
+
+.from-ls-column {
+	border-right: 1px solid #A0A0A0;
+	width: 49.5%;
+}
+
+.to-ls-column {
+	width: 50%;
+}
+
+.caseload-panel li {
+	border-bottom: 1px solid #A0A0A0;
+	padding: .25em;
+}
+
+.csld-ctrls {
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+.csld-ctrl span.label {
+	display:block;
+	width:65px;
+	float:left;
+	margin-top:5px;
+}
+.csld-ctrl {
+	float: left;
+	margin-right: 1.5em;
+}
+
+.csld-button {
+	width:100px;
+	display: block !important;
+	margin:10px auto !important;
+}
+.csld-list {
+	border: 1px solid #999999;
+    padding: 5px;
+}
+.csld-print {
+	height:50px;
+	background:#f5f5f5;
+	border-style: solid;
+	border-color: #999999;
+	border-width: 1px 1px 0 1px;
+}
+.csld-print div {
+	float: left;
+	width:50%;
+	height:50px;
+}
+.rule-violations-container {
+	margin-top: 1em;
+}
+
+.bulletedList {
+	margin-left: 2em;
+}
+.bulletedList li {
+	list-style: disc outside none;
+}
+
+.numberedList {
+	margin-left: 2em;
+}
+.numberedList li {
+	list-style: decimal outside none;
+}
+
+.tabControlSection {
+	background-color: #EEEEEE;
+	border-top: 1px solid #808080;
+	padding: 1em;
+}
+.tabControlSection form {
+	display: inline;
+}
+.facilityName {
+	font-weight: bold;
+}
+.ccl-file-check .label {
+	font-weight: bold;
+}
+
+/* ---------- STYLES THAT SHOULDN'T BE OVERRIDDEN ---------------- */
+input, select, textarea {
+	border-radius: 3px;
+	box-shadow:inset 0 1px 2px #e6e6e6;
+	margin:3px 0;
+}
+input, select{
+	height: 20px;
+}
+select.multiselect {
+	height: auto;
+}
+input.ui-button {
+	height:auto;
+}
+input.phone {
+	width: 7em !important;	
+}
+input.ssnLastFour {
+	width: 2.5em !important;
+}
+input.date, input.datepicker {
+	width: 5.5em !important;
+}
+/*
+.column input.date, .column input.datepicker,
+.widecolumn input.date, .widecolumn input.datepicker {
+	width: 10em !important;
+}
+*/
+input.time {
+	width: 4.5em !important;
+}
+input.street, input.email, input.url, input.longName {
+	width: 24em !important;
+}
+input.city {
+	width: 10em !important;
+}
+input.state {
+	width: 3em !important;
+}
+input.zipCode {
+	width: 5.6em !important;
+}
+input.name, input.optionalName {
+	width: 12em !important;	
+}
+input.idNumber {
+	width: 6em !important;
+}
+input.amountField {
+	width: 5.5em;
+}
+input.widefield {
+	width: 40em !important;
+}
+.ui-ruleautocomplete-input {
+	width: 20em !important;
+}
+.ui-ruleautocomplete-container {
+	padding-top: .5em;
+}
+.ui-facilityautocomplete-container {
+	float: left;
+    margin-left: 320px;
+    margin-top: -16px;
+    position: relative;
+    min-width: 300px;
+}
+.ui-facilityautocomplete-input {
+	width: 300px !important;
+}
+
+input.readOnly {
+	background-color: #EEEEEE;
+	border-color: #AAAAAA;
+}
+input.required, select.required, textarea.required {
+	/*background-color: #F9FACB;*/
+}
+img.ui-datepicker-trigger {
+	cursor: pointer;
+	vertical-align: middle;
+	margin-left:3px;
+}
+.shrinkCol {
+	width: 1%;
+	white-space: nowrap;
+}
+.nowrap {
+	white-space: nowrap;
+}
+label.radioLabel, .radio > label {
+	float: left;
+	width: auto !important;
+	margin-right: 1em;
+}
+input[type='radio'], input.radio, .radio > input {
+	float: left;
+	margin-right: .2em;
+}
+.inactive, .inactive td {
+	color: #000000 !important;
+}
+
+.inactive a {
+	color: #6e8ace !important;
+}
+.redrow a, .redrow td {
+	color: #FF0000 !important;
+}
+.printMetadata {
+	display: none;
+}
+.center {
+	text-align: center;
+}
+.clearLeft {
+	clear: left;
+}
+.clear {
+	clear: both;
+}
+.noClear {
+	clear: none !important;
+}
+.inline_label {
+	color: #999999;
+}
+
+.radiosWithLabel label {
+	width: auto !important;
+}
+.autoWidth {
+	width: auto !important;
+}
+
+a.quickLink {
+	text-decoration: none;
+	color: #000000;
+}
+legend a.quickLink {
+	color: #fff;
+}
+
+.caseloadLinks > li:last-child {
+	border-bottom: none;
+}
+
+/*a.quickLink:hover {
+	text-decoration: none;
+	color: #000000;
+}*/
+
+.ccl-tmpl {
+	display: none;
+}
+
+.clearfix:after, .fieldList:after, .fieldList > li:after, .fieldGroup:after, .twoColumn:after, ol.column > li:after, ol.widecolumn > li:after, .topControls:after, .bottomControls:after, .ccl-list-item:after, .ccl-subnav:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.header {
+	height: 114px;
+	background:#EEF9FB url("images/header-top-bg.png") repeat-y center top;
+}
+.header-inner {
+	width:1000px;
+	height:114px;
+	margin:0 auto;
+}
+.leftheader{
+	float: left;
+	margin:15px 0 0 45px;
+}
+.rightheader{
+	float: right;
+	margin:29px 45px 0 0;
+}
+.rightheader img {
+	border:1px solid #B3B3B3;
+}
+.header-b{
+	width:100%;
+	height:38px;
+	background:#b7b7b7 url("images/header-b-outer-bg.png") repeat-x left top;
+	box-shadow: #aaa 0 4px 4px;
+	position: relative;
+	z-index: 2;
+}
+.header-b-inner {
+	width:1000px;
+	height:38px;
+	background:transparent url("images/header-b-inner-bg.png") no-repeat center top;
+	margin: 0 auto;
+}
+.header-b-inner.trs {
+	background-image: url("images/trs-header-b-inner-bg.png");
+}
+.username-logout{
+	float:right;
+	height:14px;
+	background:#606060;
+	position:relative;
+	padding:10px;
+	margin-right:20px;
+	color:#fff;
+}
+.username-logout-inner {
+	width:24px;
+	height:34px;
+	background:transparent url("images/user-name-left-rounded.png") no-repeat left top;
+	margin-left:-34px;
+	position:absolute;
+	top:0;
+}
+.username-logout a {
+	color: #C1E1F4;
+	text-decoration:none;
+}
+
+.username-logout a:hover {
+	text-decoration:underline;
+	color: #fff;
+}
+#bd {
+}
+#yui-main {
+	width:996px;
+	margin: 0 auto !important;
+	float:none !important;
+}
+
+.version {
+	color: #D8D8D8;
+	float:right;
+}
+.charCount {
+	width:40em;
+	text-align:center;
+}
+
+.trs-icon {
+	background:transparent url('images/trs_background_icons.png') no-repeat left top;
+	width:20px;
+	height:16px;
+	display:block;
+	float:left;
+}
+.trs-icon.closed {
+	background-position: left 0;
+}
+.trs-icon.denied {
+	background-position: left -16px;
+}
+.trs-icon.final {
+	background-position: left -32px;
+}
+.trs-icon.progress {
+	background-position: left -48px;
+}
+
+.trs-magifier {
+	margin-left: -21px;
+	background-image: url('images/magnifier.png'); 
+	height: 16px; 
+	width: 16px;
+	display:block;
+	float:left;
+}
+
+@media only screen and (max-width: 1100px) {
+
+	#leftNav {
+		margin: 20px 0 0;
+		width: 159px;
+	}
+	#leftNav ul {
+		width: 157px;
+	}
+	
+	#leftNav li a {
+		width: auto;
+	}
+
+}

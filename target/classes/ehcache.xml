@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="ehcache.xsd" >
+	<diskStore path="java.io.tmpdir"/>
+	
+	<defaultCache
+		maxElementsInMemory="20000"
+		eternal="false"
+		timeToIdleSeconds="120"
+		timeToLiveSeconds="120"
+		overflowToDisk="true"
+		diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU"/>
+		
+	<cache name="gov.utah.dts.det.admin.model.PickListValue"
+		maxElementsInMemory="1000"
+		eternal="true"
+		overflowToDisk="true"
+		diskPersistent="false"/>
+		
+	<cache name="gov.utah.dts.det.ccl.model.Rule"
+		maxElementsInMemory="1000"
+		eternal="true"
+		overflowToDisk="true"
+		diskPersistent="false"/>
+		
+	<cache name="gov.utah.dts.det.ccl.model.RuleSection"
+		maxElementsInMemory="1000"
+		eternal="true"
+		overflowToDisk="true"
+		diskPersistent="false"/>
+		
+	<cache name="gov.utah.dts.det.ccl.model.RuleSubSection"
+		maxElementsInMemory="5000"
+		eternal="true"
+		overflowToDisk="true"
+		diskPersistent="false"/>
+		
+	<cache name="gov.utah.dts.det.ccl.model.Person"
+		maxElementsInMemory="10000"
+		eternal="true"
+		overflowToDisk="true"
+		diskPersistent="false"
+		memoryStoreEvictionPolicy="LRU"/>
+		
+</ehcache>

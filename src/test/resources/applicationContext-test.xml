@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:tx="http://www.springframework.org/schema/tx" 
+		xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+			http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">
+
+  <context:component-scan base-package="gov.utah.dts.det">
+    <context:exclude-filter type="regex" expression="gov.utah.dts.det.ccl.service.impl.LogServiceImpl" />
+    <context:exclude-filter type="regex" expression="gov.utah.dts.det.filemanager.service.FileServiceImpl" />
+  </context:component-scan>
+
+  <bean id="contextApplicationContextProvider" class="gov.utah.dts.det.util.spring.ApplicationContextProvider" />
+
+  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="persistenceUnitName" value="dhsLicensing" />
+    <property name="dataSource" ref="dataSource" />
+    <property name="jpaVendorAdapter">
+      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="showSql" value="true" />
+      </bean>
+    </property>
+    <property name="jpaPropertyMap">
+      <map>
+        <entry key="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+        <entry key="hibernate.format_sql" value="true" />
+      </map>
+    </property>
+  </bean>
+
+  <!-- Auto-injects the entityManagerFactory (defined above). See note there. -->
+  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory" />
+  </bean>
+
+  <!-- Use transactional annotations to define transactions. -->
+  <tx:annotation-driven transaction-manager="transactionManager" />
+
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+    <property name="url" value="jdbc:oracle:thin:@itdb200sp.dts.utah.gov:1521:vdv2" />
+    <property name="username" value="hs_licensing" />
+    <property name="password" value="h5_1icen5ing" />
+  </bean>
+
+  <!-- Hibernate Interceptors -->
+  <bean id="delegatingInterceptor" class="gov.utah.dts.det.ccl.model.interceptor.DelegatingInterceptor">
+    <property name="interceptors">
+      <list>
+        <bean class="gov.utah.dts.det.ccl.model.interceptor.AuditInterceptor" />
+        <bean class="gov.utah.dts.det.ccl.model.interceptor.LoggingInterceptor" />
+      </list>
+    </property>
+  </bean>
+
+  <!-- Initialize the spring-data-jpa repository proxies -->
+  <jpa:repositories base-package="gov.utah.dts.det" />
+
+  <bean id="fileUtils" class="gov.utah.dts.det.ccl.service.util.FileUtils">
+    <property name="rootDirectory" value="/hosts/ccl/home/ccldocs" />
+    <property name="tempDirectory" value="temp" />
+  </bean>
+
+
+  
+  <bean class="org.springframework.transaction.support.TransactionTemplate" id="sharedTransactionTemplate">
+    <property name="transactionManager" ref="transactionManager" />
+  </bean>
+  <bean class="com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection" id="openOfficeConnection"
+    destroy-method="disconnect">
+    <!-- OOo port number -->
+
+    <constructor-arg index="0">
+      <value>127.0.0.1</value>
+    </constructor-arg>
+
+    <constructor-arg index="1">
+      <value>8100</value>
+    </constructor-arg>
+  </bean>
+  <!-- <bean id="documentFormatRegistry" class="com.artofsolving.jodconverter.DefaultDocumentFormatRegistry"/> -->
+
+  <bean class="com.artofsolving.jodconverter.XmlDocumentFormatRegistry" id="documentFormatRegistry">
+
+    <constructor-arg type="java.io.InputStream">
+      <value>classpath:/document-formats.xml</value>
+    </constructor-arg>
+  </bean>
+
+  <bean class="com.artofsolving.jodconverter.openoffice.converter.StreamOpenOfficeDocumentConverter" id="documentConverter">
+
+    <constructor-arg index="0">
+      <ref bean="openOfficeConnection" />
+    </constructor-arg>
+
+    <constructor-arg index="1">
+      <ref bean="documentFormatRegistry" />
+    </constructor-arg>
+  </bean>
+
+  <bean class="gov.utah.dts.det.ccl.documents.itext.FontLoader" id="fontLoader">
+    <constructor-arg value="c:\windows\fonts" />
+  </bean>
+
+
+
+</beans>

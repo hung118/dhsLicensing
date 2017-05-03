@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+			
+    <context:component-scan base-package="gov.utah.dts.det"/>
+    		
+	<!--Bean to load properties file -->
+	<bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:application.properties"/>
+	</bean>
+	
+	<bean id="contextApplicationContextProvider" class="gov.utah.dts.det.util.spring.ApplicationContextProvider"/>
+
+	<import resource="applicationContext-dal.xml"/>
+    <import resource="applicationContext-services.xml"/>
+	<import resource="applicationContext-webservices.xml"/>
+    <import resource="applicationContext-security.xml"/>
+    
+ 	<bean name="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="applicationContextSchedulerContextKey"><value>applicationContext</value></property>
+    </bean>
+
+	<bean id="quartzJobInitializer" class="gov.utah.dts.det.admin.quartz.QuartzJobInitializer" >
+		<property name="cronExpressionDaily" value="0 0 6 ? * MON-FRI *" />
+		<property name="cronExpressionQuarterly" value="0 0 6 1 JAN,APR,JUL,OCT ?" />
+		<property name="cronExpressionYearly" value="0 0 6 1 JUL ?" />
+	</bean>
+</beans>

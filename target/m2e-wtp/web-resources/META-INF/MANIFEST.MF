@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Implementation-Title: DHS Licensing
+Build-Date: 05-03-2017 02:02
+Built-OS: Windows 10
+Implementation-Version: REPLACE-SNAPSHOT
+Built-By: hung1
+Implementation-Build: 
+Implementation-Vendor-Id: gov.utah.dts.det
+Build-Jdk: 1.8.0_121
+Created-By: Maven Integration for Eclipse
+Implementation-URL: http://dts.utah.gov
+Implementation-Vendor: State of Utah DTS
+

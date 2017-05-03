@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{MM/dd/yy hh:mm:ss a } %-5p (%c %M) - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="logfile" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${catalina.home}/logs/catalina_licensing.log"/>
+        <param name="MaxFileSize" value="10000KB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{MM/dd/yy hh:mm:ss a } %-5p (%c %M) - %m%n"/>
+        </layout>
+    </appender>
+    
+	<appender name="hibernatelog" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${catalina.home}/logs/catalina_lic_hibernate.log"/>
+        <param name="MaxFileSize" value="10000KB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{MM/dd/yy hh:mm:ss a } %-5p (%c %M) - %m%n"/>
+        </layout>
+    </appender>
+
+    <logger name="com.sun.org.apache.commons">
+        <level value="error" />
+    </logger>
+    <!-- Project -->
+    
+    <logger name="net.sf.ehcache">
+        <level value="error" />
+    </logger>
+
+    <logger name="org.apache">
+        <level value="error" />
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="error" />
+    </logger>
+
+    <logger name="com.opensymphony">
+        <level value="error" />
+    </logger>
+    
+    <logger name="freemarker">
+        <level value="error" />
+    </logger>
+
+    <logger name="gov.utah.dts.det.ccl.view.converter">
+        <level value="warn" />
+    </logger>
+
+    <logger name="gov.utah.dts.det.ccl.documents">
+        <level value="info" />
+    </logger>
+
+	<logger name="gov.utah.dts.det.ccl.security.CclPreAuthenticationFilter">
+        <level value="warn" />
+    </logger>
+
+	<logger name="org.hibernate">
+        <level value="error" />
+    </logger>
+
+	<logger name="org.displaytag">
+        <level value="warn" />
+    </logger>
+
+    <logger name="org.hibernate.SQL" additivity="false">
+		<level value="debug" />
+        <appender-ref ref="hibernatelog" />
+    </logger>
+
+    <logger name="org.hibernate.type" additivity="false">
+		<level value="trace" />
+        <appender-ref ref="hibernatelog" />
+    </logger>
+
+	<root>
+        <level value="debug"/>
+        <appender-ref ref="stdout" />
+        <appender-ref ref="logfile" />
+    </root>
+</log4j:configuration>

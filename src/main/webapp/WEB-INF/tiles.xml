@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+		  "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<!-- Main Template -->
+	<definition name="main" template="/WEB-INF/jsps/templates/main_layout.jsp">
+		<put-attribute name="title" value="DHS Online Licensing"/>
+		<put-attribute name="leftnav" value="/WEB-INF/jsps/includes/public_leftnav.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/jsps/includes/footer.jsp"/>
+	</definition>
+	
+	<definition name="print" template="/WEB-INF/jsps/templates/print_layout.jsp">
+		<put-attribute name="title" value="DHS Online Licensing"/>
+		<put-attribute name="footer" value="/WEB-INF/jsps/includes/footer.jsp"/>
+	</definition>
+	
+	<!-- Public Pages -->
+	<definition name="publicFacilitySearch" extends="main">
+		<put-attribute name="title" value="DHS Online Licensing - Facility Search"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/facility/search/public_search_heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/facility/search/public_search_form.jsp"/>
+	</definition>
+	
+	<definition name="publicFacilitySearchResults" extends="publicFacilitySearch">
+		<put-attribute name="body" value="/WEB-INF/jsps/facility/search/public_search_results.jsp"/>
+	</definition>
+	
+	<definition name="publicFacilitySearchPrint" extends="print">
+		<put-attribute name="title" value="DHS Online Licensing - Facility Search"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/facility/search/public_search_print.jsp"/>
+	</definition>
+	
+	<definition name="public.facility.file-check" extends="main">
+		<put-attribute name="title" value="DHS Online Licensing - Facility File Check"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/pub/facility/file_check_heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/pub/facility/file_check.jsp"/>
+	</definition>
+
+	<!-- Application Pages -->
+  <definition name="trs" template="/WEB-INF/jsps/templates/trs_layout.jsp">
+    <put-attribute name="title" value="DHS Licensing - Screening"/>
+    <put-attribute name="heading" value="/WEB-INF/jsps/heading.jsp"/>
+    <put-attribute name="javascript" value="/WEB-INF/jsps/includes/application_javascript.jsp"/>
+    <put-attribute name="footer" value="/WEB-INF/jsps/includes/footer.jsp"/>
+  </definition>  
+	<definition name="home" extends="main">
+		<put-attribute name="title" value="DHS Licensing - Home"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/heading.jsp"/>
+		<put-attribute name="javascript" value="/WEB-INF/jsps/includes/application_javascript.jsp"/>
+		<put-attribute name="leftnav" value="/WEB-INF/jsps/includes/application_leftnav.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/index.jsp"/>
+	</definition>
+	
+	<definition name="facilitySearch" extends="home">
+		<put-attribute name="title" value="DHS Online Licensing - Provider Search"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/facility/search/heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/facility/search/search_form.jsp"/>
+	</definition>
+	
+	<definition name="facilitySearchResults" extends="facilitySearch">
+		<put-attribute name="body" value="/WEB-INF/jsps/facility/search/search_results.jsp"/>
+	</definition>
+	
+	<definition name="facilitySearchPrint" extends="print">
+		<put-attribute name="title" value="DHS Online Licensing - Facility Search"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/facility/search/search_print.jsp"/>
+	</definition>
+	
+	<definition name="facilityCreate" extends="home">
+		<put-attribute name="title" value="DHS Online Licensing - Create Facility"/>
+		<put-attribute name="javascript" value="/WEB-INF/jsps/facility/create_javascript.jsp"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/facility/create_heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/facility/create_form.jsp"/>
+	</definition>
+	
+	<definition name="facilityEdit" extends="home">
+		<put-attribute name="title" value="DHS Licensing - Facility"/>
+		<put-attribute name="javascript" value="/WEB-INF/jsps/facility/javascript.jsp"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/facility/heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/facility/facility_base.jsp"/>
+	</definition>
+	
+  <definition name="trackingRecordScreeningEdit" extends="trs">
+    <put-attribute name="title" value="DHS Licensing - Tracking Record Screening"/>
+    <put-attribute name="javascript" value="/WEB-INF/jsps/trackingrecordscreening/javascript.jsp"/>
+    <put-attribute name="heading" value="/WEB-INF/jsps/trackingrecordscreening/newEditTrackingRecordScreening.jsp"/>
+    <put-attribute name="body" value="/WEB-INF/jsps/trackingrecordscreening/trackingrecordscreening_base.jsp"/>
+  </definition>
+
+  <definition name="trackingRecordScreeningCreate" extends="trs">
+    <put-attribute name="title" value="DHS Licensing -Tracking Record Screening"/>
+    <put-attribute name="javascript" value="/WEB-INF/jsps/trackingrecordscreening/javascript.jsp"/>
+    <put-attribute name="heading" value="/WEB-INF/jsps/trackingrecordscreening/heading.jsp"/>
+    <put-attribute name="body" value="/WEB-INF/jsps/trackingrecordscreening/newEditTrackingRecordScreening.jsp"/>
+  </definition>
+  
+  <definition name="cloneTrs" extends="trs">
+    <put-attribute name="title" value="Tracking Record Screening - Cloning"/>
+    <put-attribute name="javascript" value="/WEB-INF/jsps/trackingrecordscreening/javascript.jsp"/>
+    <put-attribute name="heading" value="/WEB-INF/jsps/trackingrecordscreening/heading.jsp"/>
+    <put-attribute name="body" value="/WEB-INF/jsps/trackingrecordscreening/cloneTRS.jsp"/>
+  </definition>
+    
+	<definition name="caregiverSearch" extends="home">
+		<put-attribute name="title" value="DHS Online Licensing - Search Individual Caregiver Records"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/caregiver/search_heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/caregiver/search_form.jsp"/>
+	</definition>
+	
+	<definition name="caregiverSearchResults" extends="caregiverSearch">
+		<put-attribute name="body" value="/WEB-INF/jsps/caregiver/search_results.jsp"/>
+	</definition>
+	
+	<definition name="caregiverRecord" extends="caregiverSearch">
+		<put-attribute name="title" value="DHS Online Licensing - Individual Caregiver Record"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/caregiver/record_heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/caregiver/caregiver_base.jsp"/>
+	</definition>
+	
+	<definition name="newCaregiverRecord" extends="caregiverRecord">
+		<put-attribute name="body" value="/WEB-INF/jsps/caregiver/new_caregiver.jsp"/>
+	</definition>
+	
+	<definition name="bcuSearch" extends="home">
+		<put-attribute name="title" value="DHS Online Licensing - BCU Reilcords Search"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/bcusearch/heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/bcusearch/search_form.jsp"/>
+	</definition>
+	
+	<definition name="bcuSearchResults" extends="bcuSearch">
+		<put-attribute name="body" value="/WEB-INF/jsps/bcusearch/search_results.jsp"/>
+	</definition>
+  
+  <definition name="trsSearch" extends="trs">
+    <put-attribute name="title" value="Tracking Record Screening - Search"/>
+    <put-attribute name="heading" value="/WEB-INF/jsps/trackingrecordscreening/search/heading.jsp"/>
+    <put-attribute name="body" value="/WEB-INF/jsps/trackingrecordscreening/search/search_form.jsp"/>
+  </definition>
+  
+
+  <definition name="trsSearchResults" extends="trsSearch">
+    <put-attribute name="body" value="/WEB-INF/jsps/trackingrecordscreening/search/search_results.jsp"/>
+  </definition>
+	
+	<definition name="unlicensed-complaints.statewide-complaints" extends="home">
+		<put-attribute name="title" value="DHS Online Licensing - Statewide Unlicensed Complaints"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/unlicensedcomplaints/heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/unlicensedcomplaints/statewide_unlicensed_complaints.jsp"/>
+	</definition>
+	
+	<definition name="unlicensed-complaints.facility-search" extends="unlicensed-complaints.statewide-complaints">
+		<put-attribute name="title" value="DHS Online Licensing - Complaints - Existing Facilities Search"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/unlicensedcomplaints/search_form.jsp"/>
+	</definition>
+	
+	<definition name="unlicensed-complaints.facility-search-results" extends="unlicensed-complaints.facility-search">
+		<put-attribute name="body" value="/WEB-INF/jsps/unlicensedcomplaints/search_results.jsp"/>
+	</definition>
+	
+	<definition name="unlicensed-complaints.complaint-form" extends="unlicensed-complaints.statewide-complaints">
+		<put-attribute name="title" value="DHS Online Licensing - New Unlicensed Complaint"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/unlicensedcomplaints/complaint_form.jsp"/>
+	</definition>
+	
+	<definition name="caseload-management.home" extends="home">
+		<put-attribute name="title" value="DHS Online Licensing - Caseload Management"/>
+		<put-attribute name="javascript" value="/WEB-INF/jsps/caseloadmanagement/caseload_javascript.jsp"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/caseloadmanagement/caseload_heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/caseloadmanagement/caseload_manager.jsp"/>
+	</definition>
+	
+	<definition name="interpretationManualRules" extends="home">
+		<put-attribute name="title" value="DHS Online Licensing - Interpretation Manual"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/inspectiontools/interpretationmanual/heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/inspectiontools/interpretationmanual/rules.jsp"/>
+	</definition>
+	
+	<definition name="reports" extends="home">
+		<put-attribute name="title" value="DHS Online Licensing - Reports"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/reports/index.jsp"/>
+	</definition>
+
+    <definition name="reportBase" extends="home">
+        <put-attribute name="title" value="DHS Online Licensing - Reports"/>
+        <put-attribute name="body" value="/WEB-INF/jsps/reports/reportBase.jsp"/>
+    </definition>
+	
+	<definition name="interpretationManualSections" extends="interpretationManualRules">
+		<put-attribute name="body" value="/WEB-INF/jsps/inspectiontools/interpretationmanual/sections.jsp"/>
+	</definition>
+	
+	<definition name="tab" template="/WEB-INF/jsps/templates/tab_layout.jsp">
+	</definition>
+	
+	<definition name="admin" extends="home">
+		<put-attribute name="title" value="DHS Online Licensing - Administration"/>
+		<put-attribute name="javascript" value="/WEB-INF/jsps/admin/javascript.jsp"/>
+		<put-attribute name="heading" value="/WEB-INF/jsps/admin/heading.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/admin/admin.jsp"/>
+	</definition>
+	
+	<!-- Error Page -->
+	<definition name="error" template="/WEB-INF/jsps/templates/main_layout.jsp">
+		<put-attribute name="title" value="DHS Online Licensing"/>
+		<put-attribute name="body" value="/WEB-INF/jsps/errors/error.jsp"/>
+	</definition>
+</tiles-definitions>

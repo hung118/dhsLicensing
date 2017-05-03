@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<constant name="struts.convention.default.parent.package" value="main"/>
+	<constant name="struts.convention.result.path" value="/WEB-INF/jsps"/>
+	<constant name="struts.action.excludePattern" value="/canary,/canary/.*,/canaryDetail,/canaryDetail/.*"/>
+
+	<!-- Configuration for gov.utah.dts.ccl.action package. -->
+	<package name="main" extends="struts-default" namespace="/">
+        <result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+			<result-type name="jacksonJson" class="gov.utah.dts.det.ccl.struts2.result.JacksonJsonResult"/>
+        </result-types>
+
+		<interceptors>
+			<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>
+			<!-- Used for persisting messages across a redirect -->
+<!--			<interceptor name="redirectMessage" class="gov.utah.dts.det.ccl.struts2.interceptor.RedirectMessageInterceptor" />-->
+<!--			<interceptor name="cacheHeadersInterceptor" class="gov.utah.dts.det.ccl.interceptor.CacheHeadersInterceptor" />-->
+
+			<interceptor-stack name="cclStack">
+				<!-- <interceptor-ref name="paramsPrepareParamsStack" /> -->
+				<!-- paramsPrepareParamsStack without the conversionError interceptor -->
+				<interceptor-ref name="exception"/>
+				<interceptor-ref name="alias"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="multiselect"/>
+				<interceptor-ref name="params">
+					<!-- Exclude the ajaxify attributes '_' and 'ajax' -->
+					<param name="excludeParams">
+						_,ajax
+					</param>
+				</interceptor-ref>
+				<interceptor-ref name="servletConfig"/>
+				<interceptor-ref name="prepare"/>
+				<interceptor-ref name="chain"/>
+				<interceptor-ref name="modelDriven"/>
+				<interceptor-ref name="fileUpload"/>
+				<interceptor-ref name="staticParams"/>
+                <interceptor-ref name="actionMappingParams"/>
+				<interceptor-ref name="params">
+					<!-- Exclude the ajaxify attributes '_' and 'ajax' -->
+					<param name="excludeParams">
+						_,ajax
+					</param>
+				</interceptor-ref>
+<!--				<interceptor-ref name="conversionError"/>-->
+				<interceptor-ref name="validation">
+					<param name="validateAnnotatedMethodOnly">true</param>  
+					<param name="excludeMethods">input,back,cancel</param>
+				</interceptor-ref>
+				<interceptor-ref name="workflow">
+					<param name="excludeMethods">input,back,cancel</param>
+				</interceptor-ref>
+				
+				<!--<interceptor-ref name="redirectMessage" />-->
+				<interceptor-ref name="json"/>
+<!--				<interceptor-ref name="cacheHeadersInterceptor"/>-->
+			</interceptor-stack>
+			
+			<interceptor-stack name="internalStack">
+				<!-- Used for actions that need no interceptors (ie. FooterAction) -->
+				<interceptor-ref name="params">
+					<!-- Exclude the ajaxify attributes '_' and 'ajax' -->
+					<param name="excludeParams">
+						_,ajax
+					</param>
+				</interceptor-ref>
+			</interceptor-stack>
+			
+			<interceptor-stack name="controlStack">
+				<!-- Used for actions that populate controls. -->
+				<interceptor-ref name="exception"/>
+				<interceptor-ref name="alias"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="multiselect"/>
+				<interceptor-ref name="params">
+					<!-- Exclude the ajaxify attributes '_' and 'ajax' -->
+					<param name="excludeParams">
+						_,ajax
+					</param>
+				</interceptor-ref>
+				<interceptor-ref name="servletConfig"/>
+				<interceptor-ref name="prepare"/>
+				<interceptor-ref name="staticParams"/>
+                <interceptor-ref name="actionMappingParams"/>
+			</interceptor-stack>
+
+		</interceptors>
+
+		<!-- Default interceptor stack. -->
+		<default-interceptor-ref name="cclStack" />
+		
+		<action name="*MemberAttachment" class="gov.utah.dts.det.ccl.actions.facility.information.board.BoardMembersAttachmentAction" method="{1}">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<!-- param name="allowedTypes">application/vnd.ms-excel</param -->
+			</interceptor-ref>
+			<interceptor-ref name="basicStack"></interceptor-ref>
+		
+			<result name="input">/WEB-INF/jsps/facility/information/board/upload_attachment_form.jsp</result>
+            <result name="redirect-edit" type="redirectAction">
+                <param name="actionName">edit-board-member</param>
+                <param name="namespace">/facility/information/board</param>
+                <param name="facilityId">${facilityId}</param>
+                <param name="boardMember.id">${boardMember.id}</param>
+            </result>
+		</action>
+		
+	</package>
+</struts>

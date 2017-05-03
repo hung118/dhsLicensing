@@ -1,0 +1,26 @@
+package gov.utah.dts.det.ccl.service;
+
+import java.util.List;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+
+import gov.utah.dts.det.ccl.model.TrackingRecordScreeningActivity;
+import gov.utah.dts.det.query.SortBy;
+
+/**
+ * 
+ * @author jtorres
+ * 
+ */
+public interface TrackingRecordScreeningActivityService extends GenericService<TrackingRecordScreeningActivity, Long> {
+	@PreAuthorize(value = "hasAnyRole('ROLE_SUPER_ADMIN','ROLE_BACKGROUND_SCREENING_MANAGER','ROLE_BACKGROUND_SCREENING')")
+	public List<TrackingRecordScreeningActivity> getActivityForScreening(Long screeningId, SortBy sortBy);
+
+	public TrackingRecordScreeningActivity save(TrackingRecordScreeningActivity entity);
+
+	public TrackingRecordScreeningActivity load(Long id);
+
+	public void delete(Long id);
+	
+	public void evict(TrackingRecordScreeningActivity entity);
+}

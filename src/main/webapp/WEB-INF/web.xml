@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+		 version="3.0">
+	<display-name>dhsLicensing</display-name>
+
+	<!-- Path to Spring config -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:applicationContext.xml
+		</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>webapp.root</param-value>
+	</context-param>
+
+<!--  Listener that sets a system property to the web application root directory. With the "webAppRootKey" init parameter at 
+		the servlet context level (i.e. context-param in web.xml), the default key is "webapp.root".
+
+	Note: This listener should be placed before ContextLoaderListener in web.xml, at least when used for log4j. 
+		Log4jConfigListener sets the system property implicitly, so there's no need for this listener in addition to it. 
+	-->
+	<listener>
+		<listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
+	</listener>
+	<!-- Spring listener -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>gov.utah.dts.det.util.CanaryListener</listener-class>
+	</listener>
+	<!-- Counts Session for canary detail -->	
+	<listener>
+		<listener-class>gov.utah.dts.canary.listener.SessionCounterListener</listener-class>
+	</listener>	
+	
+	<servlet>
+		<servlet-name>canary</servlet-name>
+		<servlet-class>gov.utah.dts.canary.servlet.CanaryServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>canary</servlet-name>
+		<url-pattern>/canary/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>canaryDetail</servlet-name>
+		<servlet-class>gov.utah.dts.canary.servlet.CanaryDetailServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>canaryDetail</servlet-name>
+		<url-pattern>/canaryDetail/*</url-pattern>
+	</servlet-mapping>
+
+	
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter>
+		<filter-name>struts</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>jpaFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter
+		</filter-class>
+	</filter>
+	
+	<filter>
+		<filter-name>noCacheFilter</filter-name>
+		<filter-class>gov.utah.dts.det.filters.HeaderFilter</filter-class>
+		<init-param>
+			<param-name>Cache-Control</param-name>
+			<param-value>no-cache, no-store</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Pragma</param-name>
+			<param-value>no-cache</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Expires</param-name>
+			<param-value>-1</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>cacheIndefinitelyFilter</filter-name>
+		<filter-class>gov.utah.dts.det.filters.HeaderFilter</filter-class>
+		<init-param>
+			<param-name>Cache-Control</param-name>
+			<param-value>max-age=315360000,public</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Expires</param-name>
+			<param-value>Thu Dec 31 2020 08:00:00 GMT-0700 (MST)</param-value>
+		</init-param>
+	</filter>
+  
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>jpaFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>struts</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>noCacheFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>cacheIndefinitelyFilter</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>cacheIndefinitelyFilter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<session-config>
+		<session-timeout>240</session-timeout>
+	</session-config>
+	
+	<error-page>
+		<error-code>403</error-code>
+		<location>/errors/error-403.action</location>
+	</error-page>
+	<!--	<error-page>-->
+	<!--		<error-code>404</error-code>-->
+	<!--		<location>/WEB-INF/jsps/errors/error.jsp</location>-->
+	<!--	</error-page>-->
+	<!--	<error-page>-->
+	<!--		<error-code>500</error-code>-->
+	<!--		<location>/WEB-INF/jsps/errors/error.jsp</location>-->
+	<!--	</error-page>-->
+
+</web-app>

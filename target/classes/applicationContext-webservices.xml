@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm.xsd">
+	<!-- 
+ 	<bean id="destinationProvider" class="org.springframework.ws.client.support.destination.Wsdl11DestinationProvider">
+		<property name="wsdl" value="http://applog.at.utah.gov:8080/ApplicationLogging/services/log.wsdl"/>
+ 		<property name="wsdl" value="#{applicationService.getApplicationPropertyValue('app.logging.wsdl.url')}"/>
+	</bean> 
+	
+	<bean id="messagFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>
+
+	<oxm:jaxb2-marshaller id="marshaller">
+		<oxm:class-to-be-bound name="gov.utah.dts.det.ccl.logging.ReadLogRequest"/>
+		<oxm:class-to-be-bound name="gov.utah.dts.det.ccl.logging.ReadLogResponse"/>
+		<oxm:class-to-be-bound name="gov.utah.dts.det.ccl.logging.WriteLogRequest"/>
+		<oxm:class-to-be-bound name="gov.utah.dts.det.ccl.logging.WriteLogResponse"/>
+		<oxm:class-to-be-bound name="gov.utah.dts.det.ccl.logging.Application"/>
+		<oxm:class-to-be-bound name="gov.utah.dts.det.ccl.logging.LogData"/>
+		<oxm:class-to-be-bound name="gov.utah.dts.det.ccl.logging.LogDataFilter"/>
+	</oxm:jaxb2-marshaller>
+	
+	<bean id="logService" class="gov.utah.dts.det.ccl.service.impl.LogServiceImpl">
+		<constructor-arg ref="messagFactory"/>
+		<property name="destinationProvider" ref="destinationProvider"/>
+		<property name="marshaller" ref="marshaller"/>
+		<property name="unmarshaller" ref="marshaller"/>
+	</bean>
+-->
+	
+</beans>    

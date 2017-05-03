@@ -1,0 +1,25 @@
+<script id="ccl-facility-sticky-notes-tmpl" type="text/x-jquery-tmpl">
+	<div class="ccl-st-nt-info">
+		Use this for temporary notes only.  They can be added and deleted by any user.
+	</div>
+	<table class="ccl-st-nt-tbl">
+		{{each notes}}
+			<tr class="{id: ${$index}}">
+				<td>
+					<a href="#" class="ccl-st-nt-edit">${$value}</a>
+				</td>
+				<td>
+					<a href="#" class="ccl-st-nt-delete ccl-button-no-bg">&nbsp;</a>
+				</td>
+			</tr>
+		{{/each}}
+	</table>
+	<ol class="fieldList marginTop">
+		<li>
+			<label for="ccl-st-nt-note"/><textarea id="ccl-st-nt-note" name="note"/>
+		</li>
+		<li class="submit">
+			<a href="#" class="ccl-st-nt-save ccl-button">Save</a>
+		</li>
+	</ol>
+</script>

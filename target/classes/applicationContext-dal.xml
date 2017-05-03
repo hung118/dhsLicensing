@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">
+    
+	<!--
+		NOTE: The naming convention here is intentional! The JPA transaction
+		manager (defined below) looks for a bean called "entityManagerFactory", which it then injects
+		into itself by default. If you change the name of this factory, then the transaction manager
+		will break unless you add an 'entityManagerFactory' property to it! SEE THE persitence.xml file
+	-->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="dhsLicensing"/>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="persistenceProvider">
+			<bean class="gov.utah.dts.det.util.spring.ConfigurableHibernatePersistence">
+				<constructor-arg ref="delegatingInterceptor"/>
+			</bean>
+		</property>
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<!-- hibernate.show_sql logging system.out -->
+				<property name="showSql" value="false" />
+				<property name="databasePlatform" value="org.hibernate.dialect.Oracle9Dialect" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- Auto-injects the entityManagerFactory (defined above). See note there. -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	</bean>
+
+	<!-- Use transactional annotations to define transactions. -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean id="sharedTransactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+
+	<!--  DEFINE THE DATA SOURCE HERE (SEE THE META-INF/context.xml)  -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:/comp/env/jdbc/dhsLicensing</value>
+		</property>
+		<property name="lookupOnStartup">
+			<value>false</value>
+		</property>
+		<property name="proxyInterface">
+			<value>javax.sql.DataSource</value>
+		</property>
+	</bean>
+	
+	<!-- Hibernate Interceptors -->
+	<bean id="delegatingInterceptor" class="gov.utah.dts.det.ccl.model.interceptor.DelegatingInterceptor">
+		<property name="interceptors">
+			<list>
+				<bean class="gov.utah.dts.det.ccl.model.interceptor.AuditInterceptor"/>
+				<bean class="gov.utah.dts.det.ccl.model.interceptor.LoggingInterceptor"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Initialize the spring-data-jpa repository proxies -->
+    <jpa:repositories base-package="gov.utah.dts.det"/>
+</beans>
